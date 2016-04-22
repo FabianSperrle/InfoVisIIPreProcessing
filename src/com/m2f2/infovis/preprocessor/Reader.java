@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -35,11 +34,6 @@ public class Reader {
 						Function.identity(),
 						(crime1, crime2) -> crime2
 						));
-	}
-	
-	public List<Outcome> getOutcomes(Stream<String> stream) {
-		return stream.map(line -> new Outcome(line.split(",", 10)))
-				.collect(Collectors.toList());
 	}
 	
 	private Stream<String> safeLines(Path path) {

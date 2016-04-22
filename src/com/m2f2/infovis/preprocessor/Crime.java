@@ -15,7 +15,6 @@ public class Crime {
 	private String crimetype;
 	private String lastOutcomCategory;
 	private String context;
-	private Outcome outcome;
 	
 	public Crime(String[] line) {
 		this.id = line[0];
@@ -107,9 +106,5 @@ public class Crime {
 	}
 	public void setContext(String context) {
 		this.context = context;
-	}
-	
-	public void setOutcome(Outcome outcome) {
-		this.outcome = outcome;
 	}
 }
