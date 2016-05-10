@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script>
+
+        console.log(window.performance.now());
+
+        d3.json("https://raw.githubusercontent.com/FabianSperrle/InfoVisIIPreProcessing/master/DataComplete/crimes.json", function(error, data) {
+
+            console.log(window.performance.now());
+
+        	var aggregates = {};
+        	for(var i = 0; i < data.length; i++) {
+        		var current = data[i];
+
+        		var year = 'y' + current.month.substring(0,4);
+        		var month = 'm' + current.month.substring(5,7);
+
+        		if (aggregates[year] === undefined) {
+        			aggregates[year] = {};
+        		}
+
+        		if (aggregates[year][month] === undefined) {
+        			aggregates[year][month] = {
+        				allCrimes: 0,
+        				violence_and_sex: 0,
+        				other_theft: 0,
+        				burglary: 0,
+        				violent_crime: 0,
+        				bicycle_theft: 0,
+        				anti_social_behaviour: 0,
+        				other_crime: 0,
+        				shoplifting: 0,
+        				drugs: 0,
+        				criminal_damage_and_arson: 0,
+        				vehicle_crime: 0,
+        				theft_from_the_person: 0,
+        				public_disorder_weapons: 0,
+        				public_order: 0,
+        				robbery: 0,
+        				possesion_of_weapons: 0,
+        			};
+        		}
+
+        		aggregates[year][month].allCrimes++;
+
+                switch(current.crimetype) {
+                	case "Violence and sexual offences":
+        				aggregates[year][month].violence_and_sex++;
+                		break;
+					case "Other theft":
+        				aggregates[year][month].other_theft++;
+                		break;
+					case "Burglary":
+        				aggregates[year][month].burglary++;
+                		break;
+					case "Violent crime":
+        				aggregates[year][month].violent_crime++;
+                		break;
+					case "Bicycle theft":
+        				aggregates[year][month].bicycle_theft++;
+                		break;
+					case "Anti-social behaviour":
+        				aggregates[year][month].anti_social_behaviour++;
+                		break;
+					case "Other crime":
+        				aggregates[year][month].other_crime++;
+                		break;
+					case "Shoplifting":
+        				aggregates[year][month].shoplifting++;
+                		break;
+					case "Drugs":
+        				aggregates[year][month].drugs++;
+                		break;
+					case "Criminal damage and arson":
+        				aggregates[year][month].criminal_damage_and_arson++;
+                		break;
+					case "Vehicle crime":
+        				aggregates[year][month].vehicle_crime++;
+                		break;
+					case "Theft from the person":
+        				aggregates[year][month].theft_from_the_person++;
+                		break;
+					case "Public disorder and weapons":
+        				aggregates[year][month].public_disorder_weapons++;
+                		break;
+					case "Public order":
+        				aggregates[year][month].public_order++;
+                		break;
+					case "Robbery":
+        				aggregates[year][month].robbery++;
+                		break;
+					case "Possession of weapons":
+        				aggregates[year][month].possesion_of_weapons++;
+                		break;
+                }
+
+        	}
+
+            console.log(window.performance.now());
+        	console.log(JSON.stringify(aggregates));
+        });
+
+        </script>
+    </body>
+</html>
