@@ -19,6 +19,9 @@ public class Main {
 		
 		Gson gson = new Gson();
 		Crime[] crimeArray = crimes.values().toArray(new Crime[0]);
+		for (Crime crime : crimeArray) {
+			System.out.println(crime.getCrimetype() + " --- " + crime.getLastOutcomCategory());
+		}
 		String json = gson.toJson(crimeArray);
 		
 		FileWriter writer = new FileWriter("DataComplete/crimes.json");
